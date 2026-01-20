@@ -1,0 +1,276 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "CivicData Kenya Facilities API v1",
+    "description": "# CivicData Kenya Facilities API\n\nA RESTful API for accessing public facility data across Kenya. This collection provides mock endpoints for healthcare facilities, educational institutions, and social service centers.\n\n## Base URL\n`https://api.civicdata.go.ke/v1`\n\n## Authentication\nPublic endpoints - no authentication required for read access.\n\n## Versioning\nAPI version is included in the URL path (`/v1/`). Breaking changes will increment the version number.\n\n## Rate Limiting\n- Public access: 100 requests/minute\n- Partner access: 1000 requests/minute (requires API key)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.civicdata.go.ke/v1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Facilities",
+      "description": "Endpoints for accessing facility data",
+      "item": [
+        {
+          "name": "List Facilities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/facilities?region=nairobi&category=health&limit=100&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["facilities"],
+              "query": [
+                {
+                  "key": "region",
+                  "value": "nairobi",
+                  "description": "Filter by county (e.g., nairobi, mombasa, kisumu, nakuru)"
+                },
+                {
+                  "key": "category",
+                  "value": "health",
+                  "description": "Filter by facility type (health, education, social_services)"
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of results per page (default: 100, max: 500)"
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset (default: 0)"
+                }
+              ]
+            },
+            "description": "Retrieve a paginated list of facilities with optional filtering by region and category."
+          },
+          "response": [
+            {
+              "name": "List Facilities - Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/facilities?limit=100&offset=0",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["facilities"],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"version\": \"1.0\",\n    \"total_facilities\": 1247,\n    \"limit\": 100,\n    \"offset\": 0\n  },\n  \"data\": [\n    {\n      \"id\": \"FAC-101\",\n      \"name\": \"Kenyatta National Hospital\",\n      \"category\": \"health\",\n      \"region\": \"Nairobi\",\n      \"address\": \"Hospital Road, Upper Hill, Nairobi\",\n      \"coordinates\": {\n        \"latitude\": -1.3012,\n        \"longitude\": 36.8075\n      },\n      \"services\": [\"Emergency Care\", \"Outpatient Services\", \"Maternal Care\", \"HIV Testing\", \"Vaccinations\"],\n      \"updated_at\": \"2025-12-15T08:30:00Z\"\n    },\n    {\n      \"id\": \"FAC-102\",\n      \"name\": \"Kibera Community Library\",\n      \"category\": \"education\",\n      \"region\": \"Nairobi\",\n      \"address\": \"Olympic Estate, Kibera, Nairobi\",\n      \"coordinates\": {\n        \"latitude\": -1.3133,\n        \"longitude\": 36.7876\n      },\n      \"services\": [\"Digital Literacy\", \"Community Programs\", \"Youth Services\", \"Book Lending\"],\n      \"updated_at\": \"2025-11-20T14:15:00Z\"\n    },\n    {\n      \"id\": \"FAC-103\",\n      \"name\": \"Mombasa Social Services Centre\",\n      \"category\": \"social_services\",\n      \"region\": \"Mombasa\",\n      \"address\": \"Nyali Road, Nyali, Mombasa\",\n      \"coordinates\": {\n        \"latitude\": -4.0219,\n        \"longitude\": 39.7132\n      },\n      \"services\": [\"NHIF Registration\", \"Disability Support\", \"Child Welfare\", \"Elderly Care\"],\n      \"updated_at\": \"2025-10-05T09:45:00Z\"\n    },\n    {\n      \"id\": \"FAC-104\",\n      \"name\": \"Kisumu County Referral Hospital\",\n      \"category\": \"health\",\n      \"region\": \"Kisumu\",\n      \"address\": \"Jomo Kenyatta Highway, Milimani, Kisumu\",\n      \"coordinates\": {\n        \"latitude\": -0.0917,\n        \"longitude\": 34.7680\n      },\n      \"services\": [\"Emergency Care\", \"Maternal Care\", \"HIV Testing\", \"TB Treatment\"],\n      \"updated_at\": \"2025-12-01T11:00:00Z\"\n    },\n    {\n      \"id\": \"FAC-105\",\n      \"name\": \"Nakuru Public Library\",\n      \"category\": \"education\",\n      \"region\": \"Nakuru\",\n      \"address\": \"Kenyatta Avenue, Nakuru CBD\",\n      \"coordinates\": {\n        \"latitude\": -0.2833,\n        \"longitude\": 36.0667\n      },\n      \"services\": [\"Book Lending\", \"Research Services\", \"Computer Access\", \"Study Rooms\"],\n      \"updated_at\": \"2025-09-18T16:30:00Z\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "List Facilities - Filtered by Region",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/facilities?region=nairobi&limit=50",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["facilities"],
+                  "query": [
+                    {
+                      "key": "region",
+                      "value": "nairobi"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"version\": \"1.0\",\n    \"total_facilities\": 312,\n    \"limit\": 50,\n    \"offset\": 0\n  },\n  \"data\": [\n    {\n      \"id\": \"FAC-101\",\n      \"name\": \"Kenyatta National Hospital\",\n      \"category\": \"health\",\n      \"region\": \"Nairobi\",\n      \"address\": \"Hospital Road, Upper Hill, Nairobi\",\n      \"coordinates\": {\n        \"latitude\": -1.3012,\n        \"longitude\": 36.8075\n      },\n      \"services\": [\"Emergency Care\", \"Outpatient Services\", \"Maternal Care\", \"HIV Testing\", \"Vaccinations\"],\n      \"updated_at\": \"2025-12-15T08:30:00Z\"\n    },\n    {\n      \"id\": \"FAC-102\",\n      \"name\": \"Kibera Community Library\",\n      \"category\": \"education\",\n      \"region\": \"Nairobi\",\n      \"address\": \"Olympic Estate, Kibera, Nairobi\",\n      \"coordinates\": {\n        \"latitude\": -1.3133,\n        \"longitude\": 36.7876\n      },\n      \"services\": [\"Digital Literacy\", \"Community Programs\", \"Youth Services\", \"Book Lending\"],\n      \"updated_at\": \"2025-11-20T14:15:00Z\"\n    },\n    {\n      \"id\": \"FAC-106\",\n      \"name\": \"Mathare Health Centre\",\n      \"category\": \"health\",\n      \"region\": \"Nairobi\",\n      \"address\": \"Mathare North, Nairobi\",\n      \"coordinates\": {\n        \"latitude\": -1.2621,\n        \"longitude\": 36.8574\n      },\n      \"services\": [\"Primary Care\", \"HIV Testing\", \"Vaccinations\", \"Family Planning\"],\n      \"updated_at\": \"2025-11-10T10:00:00Z\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "List Facilities - Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/facilities?limit=1000",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["facilities"],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"INVALID_PARAMETER\",\n    \"message\": \"Parameter 'limit' exceeds maximum value of 500\",\n    \"details\": {\n      \"parameter\": \"limit\",\n      \"provided\": 1000,\n      \"maximum\": 500\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Single Facility",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/facilities/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["facilities", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "FAC-101",
+                  "description": "Unique facility identifier"
+                }
+              ]
+            },
+            "description": "Retrieve detailed information for a specific facility by its ID."
+          },
+          "response": [
+            {
+              "name": "Get Facility - Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/facilities/FAC-101",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["facilities", "FAC-101"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"FAC-101\",\n  \"name\": \"Kenyatta National Hospital\",\n  \"category\": \"health\",\n  \"region\": \"Nairobi\",\n  \"address\": \"Hospital Road, Upper Hill, Nairobi\",\n  \"coordinates\": {\n    \"latitude\": -1.3012,\n    \"longitude\": 36.8075\n  },\n  \"services\": [\"Emergency Care\", \"Outpatient Services\", \"Maternal Care\", \"HIV Testing\", \"Vaccinations\", \"Surgery\", \"Radiology\", \"Laboratory Services\"],\n  \"contact\": {\n    \"phone\": \"+254 20 2726300\",\n    \"email\": \"info@knh.or.ke\",\n    \"website\": \"https://knh.or.ke\"\n  },\n  \"operating_hours\": {\n    \"monday\": \"24 hours\",\n    \"tuesday\": \"24 hours\",\n    \"wednesday\": \"24 hours\",\n    \"thursday\": \"24 hours\",\n    \"friday\": \"24 hours\",\n    \"saturday\": \"24 hours\",\n    \"sunday\": \"24 hours\"\n  },\n  \"created_at\": \"2020-01-15T00:00:00Z\",\n  \"updated_at\": \"2025-12-15T08:30:00Z\"\n}"
+            },
+            {
+              "name": "Get Facility - Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/facilities/FAC-999",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["facilities", "FAC-999"]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NOT_FOUND\",\n    \"message\": \"Facility with ID 'FAC-999' not found\",\n    \"details\": {\n      \"resource\": \"facility\",\n      \"id\": \"FAC-999\"\n    }\n  }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Filters",
+      "description": "Endpoints for retrieving available filter options",
+      "item": [
+        {
+          "name": "Get Available Filters",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/facilities/filters",
+              "host": ["{{baseUrl}}"],
+              "path": ["facilities", "filters"]
+            },
+            "description": "Retrieve all available filter options for categories and regions. Use these values when filtering the facilities list."
+          },
+          "response": [
+            {
+              "name": "Get Filters - Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/facilities/filters",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["facilities", "filters"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"categories\": [\n    {\"value\": \"health\", \"label\": \"Healthcare\", \"count\": 524},\n    {\"value\": \"education\", \"label\": \"Education\", \"count\": 412},\n    {\"value\": \"social_services\", \"label\": \"Social Services\", \"count\": 311}\n  ],\n  \"regions\": [\n    {\"value\": \"nairobi\", \"label\": \"Nairobi County\", \"count\": 312},\n    {\"value\": \"mombasa\", \"label\": \"Mombasa County\", \"count\": 187},\n    {\"value\": \"kisumu\", \"label\": \"Kisumu County\", \"count\": 156},\n    {\"value\": \"nakuru\", \"label\": \"Nakuru County\", \"count\": 143},\n    {\"value\": \"kiambu\", \"label\": \"Kiambu County\", \"count\": 128},\n    {\"value\": \"machakos\", \"label\": \"Machakos County\", \"count\": 98},\n    {\"value\": \"kajiado\", \"label\": \"Kajiado County\", \"count\": 76},\n    {\"value\": \"uasin_gishu\", \"label\": \"Uasin Gishu County\", \"count\": 72},\n    {\"value\": \"kilifi\", \"label\": \"Kilifi County\", \"count\": 75}\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
